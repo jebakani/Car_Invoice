@@ -17,7 +17,7 @@ namespace InvoiceGenerationTest
         public void TotalFareForSingleRide()
         {
             double distance = 40;
-            double time = 10;
+            int time = 10;
             double actual = invoice.CalculateFare(distance,time);
             double expected = 410;
             Assert.AreEqual(expected, actual);
@@ -29,7 +29,7 @@ namespace InvoiceGenerationTest
             try
             {
                 double distance = 0;
-                double time = 10;
+                int time = 10;
                 var actual = invoice.CalculateFare(distance, time);
             }
             catch (InvoiceException IE)
@@ -44,13 +44,22 @@ namespace InvoiceGenerationTest
             try
             {
                 double distance = 40;
-                double time = 0;
+                int time = 0;
                 var actual = invoice.CalculateFare(distance, time);
             }
             catch (InvoiceException IE)
             {
                 Assert.AreEqual("Time Cannot be 0", IE.Message);
             }
+        }
+        //find the total fare for multiple ride
+        [TestMethod]
+        public void TotalFareForMultipleRides()
+        {
+            Rides[] rides = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
+            var actual = invoice.CalcualateTotalFair(rides);
+            double expected = 1290;
+            Assert.AreEqual(expected, actual);
         }
     }
 }
