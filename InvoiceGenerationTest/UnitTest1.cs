@@ -73,6 +73,18 @@ namespace InvoiceGenerationTest
             var res = actual.Equals(expected);
             Assert.IsNotNull(res);
         }
+        //Calculating the fare from ride repo
+        [TestMethod]
+        public void CalculatingfromRideRepository()
+        {
+            Rides[] rides1 = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
+            Rides[] rides2 = { new Rides(55, 10), new Rides(58, 75), new Rides(15, 15) };
+            rideRepository.AddDetails(3, rides1);
+            rideRepository.AddDetails(4, rides2);
+            InvoiceSummary expected = invoice.CalcualateTotalFair(rides2);
+            InvoiceSummary actual = rideRepository.ReadSummary(4);
+            Assert.AreEqual(expected, actual);
+        }
 
     }
 }
