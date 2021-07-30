@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarInvoiceGeneration", "CarInvoiceGeneration.csproj", "{1F153795-368C-47F7-88E7-D5A7EED0F97C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarInvoiceGeneration", "CarInvoiceGeneration.csproj", "{1F153795-368C-47F7-88E7-D5A7EED0F97C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceGenerationTest", "..\InvoiceGenerationTest\InvoiceGenerationTest.csproj", "{3976516C-C1AA-49D3-92D0-5E6677AAE19A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{1F153795-368C-47F7-88E7-D5A7EED0F97C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F153795-368C-47F7-88E7-D5A7EED0F97C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F153795-368C-47F7-88E7-D5A7EED0F97C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3976516C-C1AA-49D3-92D0-5E6677AAE19A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3976516C-C1AA-49D3-92D0-5E6677AAE19A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3976516C-C1AA-49D3-92D0-5E6677AAE19A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3976516C-C1AA-49D3-92D0-5E6677AAE19A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
