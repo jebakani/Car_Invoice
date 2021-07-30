@@ -11,7 +11,6 @@ namespace InvoiceGenerationTest
         public void setup()
         {
             rideRepository = new RideRepository();
-            invoice = new InvoiceGenerator();
         }
         //method to find the total fare of single ride
         [TestMethod]
@@ -19,6 +18,7 @@ namespace InvoiceGenerationTest
         {
             double distance = 40;
             int time = 10;
+            invoice = new InvoiceGenerator(RideType.NORMAL);
             double actual = invoice.CalculateFare(distance,time);
             double expected = 410;
             Assert.AreEqual(expected, actual);
@@ -31,6 +31,7 @@ namespace InvoiceGenerationTest
             {
                 double distance = 0;
                 int time = 10;
+                invoice = new InvoiceGenerator(RideType.NORMAL);
                 var actual = invoice.CalculateFare(distance, time);
             }
             catch (InvoiceException IE)
@@ -46,6 +47,7 @@ namespace InvoiceGenerationTest
             {
                 double distance = 40;
                 int time = 0;
+                invoice = new InvoiceGenerator(RideType.NORMAL);
                 var actual = invoice.CalculateFare(distance, time);
             }
             catch (InvoiceException IE)
@@ -58,6 +60,7 @@ namespace InvoiceGenerationTest
         public void TotalFareForMultipleRides()
         {
             Rides[] rides = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
+            invoice = new InvoiceGenerator(RideType.NORMAL);
             InvoiceSummary actual = invoice.CalcualateTotalFair(rides);
             double expected = 1290;
             Assert.AreEqual(expected, actual.totalFare);
@@ -68,6 +71,7 @@ namespace InvoiceGenerationTest
         public void InvoiceSummaryTest()
         {
             Rides[] rides = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
+            invoice = new InvoiceGenerator(RideType.NORMAL);
             InvoiceSummary actual = invoice.CalcualateTotalFair(rides);
             InvoiceSummary expected = new InvoiceSummary(3, 1290);
             var res = actual.Equals(expected);
@@ -79,8 +83,9 @@ namespace InvoiceGenerationTest
         {
             Rides[] rides1 = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
             Rides[] rides2 = { new Rides(55, 10), new Rides(58, 75), new Rides(15, 15) };
-            rideRepository.AddDetails(3, rides1);
-            rideRepository.AddDetails(4, rides2);
+            rideRepository.AddDetails(3, rides1,RideType.NORMAL);
+            rideRepository.AddDetails(4, rides2,RideType.PREMIUM);
+            invoice = new InvoiceGenerator(RideType.PREMIUM);
             InvoiceSummary expected = invoice.CalcualateTotalFair(rides2);
             InvoiceSummary actual = rideRepository.ReadSummary(4);
             Assert.AreEqual(expected, actual);

@@ -11,13 +11,24 @@ namespace CarInvoiceGeneration
         private readonly int COST_PER_KM;
         private readonly int COST_PER_MIN;
         private readonly int MIN_FARE;
-
+        RideType ridetype;
+        
         //initialize the readonly value through constructor
-        public InvoiceGenerator()
+        public InvoiceGenerator(RideType ridetype)
         {
-            this.COST_PER_KM = 10;
-            this.COST_PER_MIN = 1;
-            this.MIN_FARE = 5;
+            this.ridetype = ridetype;
+            if(this.ridetype.Equals(RideType.PREMIUM))
+            {
+                this.COST_PER_KM = 15;
+                this.COST_PER_MIN = 2;
+                this.MIN_FARE = 20;
+            }
+            if (this.ridetype.Equals(RideType.NORMAL))
+            {
+                this.COST_PER_KM = 10;
+                this.COST_PER_MIN = 1;
+                this.MIN_FARE = 10;
+            }
         }
 
         public double CalculateFare(double distance, int timeInMin)
