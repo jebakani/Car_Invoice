@@ -41,7 +41,7 @@ namespace CarInvoiceGeneration
         }
         //passing the ride object as array
         //calculate total fair of each rides
-        public double CalcualateTotalFair(Rides[] rides)
+        public InvoiceSummary CalcualateTotalFair(Rides[] rides)
         {
             double totalFare = 0;
             try
@@ -57,7 +57,7 @@ namespace CarInvoiceGeneration
             {
                 throw new InvoiceException(InvoiceException.ExceptionType.NO_RIDES_FOUND, "No ride available");
             }
-            return totalFare;
+            return new InvoiceSummary(rides.Length, totalFare);
         }
 
     }

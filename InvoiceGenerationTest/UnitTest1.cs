@@ -6,10 +6,11 @@ namespace InvoiceGenerationTest
     public class UnitTest1
     {
         InvoiceGenerator invoice;
-
+        RideRepository rideRepository;
         [TestInitialize]
         public void setup()
         {
+            rideRepository = new RideRepository();
             invoice = new InvoiceGenerator();
         }
         //method to find the total fare of single ride
@@ -57,9 +58,21 @@ namespace InvoiceGenerationTest
         public void TotalFareForMultipleRides()
         {
             Rides[] rides = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
-            var actual = invoice.CalcualateTotalFair(rides);
+            InvoiceSummary actual = invoice.CalcualateTotalFair(rides);
             double expected = 1290;
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expected, actual.totalFare);
         }
+
+        //given the ride details return invoice summary
+        [TestMethod]
+        public void InvoiceSummaryTest()
+        {
+            Rides[] rides = { new Rides(40, 10), new Rides(50, 25), new Rides(35, 5) };
+            InvoiceSummary actual = invoice.CalcualateTotalFair(rides);
+            InvoiceSummary expected = new InvoiceSummary(3, 1290);
+            var res = actual.Equals(expected);
+            Assert.IsNotNull(res);
+        }
+
     }
 }
